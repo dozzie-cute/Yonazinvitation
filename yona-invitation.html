@@ -1,0 +1,296 @@
+<title>Yona's 18th Pool Party</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: black stage, gold hairline frame around a centered hero with a giant outlined 18, wine-red glow behind; single column of sections below. Committed dark look. */
+:root {
+  --bg: #0b0908;
+  --surface: #14100e;
+  --fg: #f4ead2;
+  --muted: #b8aa8c;
+  --line: #3b2f1e;
+  --gold: #d6a936;
+  --gold-hi: #f3d37a;
+  --gold-lo: #9a7418;
+  --wine: #7a1c2d;
+  --wine-deep: #4a0f1b;
+  --on-gold: #1a1204;
+  --field: #0f0c0a;
+  --err: #ff9b8f;
+  --font-display: "Marcellus", "Palatino Linotype", Georgia, serif;
+  --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font: 400 1rem/1.65 var(--font-body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; text-wrap: balance; margin: 0; line-height: 1.1; }
+p { margin: 0; }
+.eyebrow { font-size: .76rem; letter-spacing: .26em; text-transform: uppercase; font-weight: 700; color: var(--gold); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--gold-hi); outline-offset: 2px;
+}
+
+/* hero */
+.hero-wrap { margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px))); }
+.hero {
+  position: relative; overflow: hidden; text-align: center;
+  padding: 40px max(24px, env(safe-area-inset-left, 0px)) 48px;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 38%, var(--wine) 0%, var(--wine-deep) 45%, transparent 75%),
+    var(--bg);
+}
+.frame {
+  position: relative; max-width: 640px; margin: 0 auto; padding: 56px 24px 52px;
+  border: 1px solid var(--gold-lo); outline: 1px solid var(--gold-lo); outline-offset: 6px;
+  background: rgba(11, 9, 8, .35);
+}
+.big18 {
+  position: absolute; inset: 0; display: grid; place-items: center; z-index: 0;
+  font-family: var(--font-display); font-size: clamp(11rem, 52vw, 21rem); line-height: 1;
+  color: transparent; -webkit-text-stroke: 1.5px rgba(214, 169, 54, .28); user-select: none; pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 1; display: grid; gap: 18px; justify-items: center; }
+.hero h1 {
+  font-size: clamp(2.3rem, 9.5vw, 4.2rem); letter-spacing: .01em;
+  background: linear-gradient(180deg, var(--gold-hi), var(--gold) 55%, var(--gold-lo));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero h1 small { display: block; font-size: .5em; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 6px; }
+.sub { font-family: var(--font-display); font-size: clamp(1.05rem, 4vw, 1.4rem); letter-spacing: .12em; text-transform: uppercase; }
+.rule { width: 88px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); border: 0; margin: 4px 0; }
+.tag { max-width: 34ch; color: var(--muted); }
+.cta {
+  margin-top: 10px; display: inline-flex; gap: 10px; align-items: center;
+  background: linear-gradient(180deg, var(--gold-hi), var(--gold)); color: var(--on-gold);
+  font-weight: 700; letter-spacing: .06em; text-decoration: none; padding: 14px 28px; border-radius: 2px;
+}
+.cta:hover { filter: brightness(1.08); }
+
+/* sections */
+main { max-width: 640px; margin: 0 auto; display: grid; gap: 72px; padding-block: 64px 72px; }
+section { display: grid; gap: 22px; }
+section h2 { font-size: clamp(1.8rem, 6.5vw, 2.6rem); color: var(--gold-hi); }
+.lead { color: var(--muted); max-width: 60ch; }
+.facts { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.facts li {
+  display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: center;
+  padding: 18px 0; border-bottom: 1px solid var(--line); min-width: 0;
+}
+.ico { width: 44px; height: 44px; background: var(--wine); color: var(--gold-hi); border: 1px solid var(--gold-lo); display: grid; place-items: center; }
+.ico svg { width: 22px; height: 22px; }
+.facts b { display: block; font-size: .74rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); }
+.facts span { overflow-wrap: anywhere; font-family: var(--font-display); font-size: 1.2rem; }
+.todo { color: var(--muted); font-style: italic; }
+
+.reminders { display: grid; }
+.reminder { display: grid; grid-template-columns: 44px 1fr; gap: 16px; padding: 24px 0; border-top: 1px solid var(--line); min-width: 0; }
+.reminder:last-child { border-bottom: 1px solid var(--line); }
+.reminder h3 { font-size: 1.05rem; letter-spacing: .14em; color: var(--gold); margin-bottom: 8px; }
+.reminder p { color: var(--muted); }
+.reminder strong { color: var(--fg); }
+
+/* form */
+form { display: grid; gap: 22px; background: var(--surface); border: 1px solid var(--gold-lo); padding: 26px; }
+fieldset { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: 10px; }
+legend, label.l { font-weight: 700; font-size: .95rem; padding: 0; margin-bottom: 8px; display: block; }
+input[type="text"], select, textarea {
+  width: 100%; font: inherit; color: var(--fg); background: var(--field);
+  border: 1px solid var(--line); border-radius: 2px; padding: 12px 14px;
+}
+input[type="text"]:focus, select:focus, textarea:focus { border-color: var(--gold); }
+textarea { min-height: 96px; resize: vertical; }
+.choices { display: flex; flex-wrap: wrap; gap: 10px; }
+.choices label { position: relative; }
+.choices input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.choices span {
+  display: inline-block; padding: 11px 18px; border: 1px solid var(--line);
+  background: var(--field); font-weight: 500; cursor: pointer;
+}
+.choices input:checked + span { background: var(--wine); border-color: var(--gold); color: var(--gold-hi); }
+.choices input:focus-visible + span { outline: 3px solid var(--gold-hi); outline-offset: 2px; }
+.submit {
+  font: inherit; font-weight: 700; letter-spacing: .06em; border: 0; cursor: pointer; border-radius: 2px;
+  background: linear-gradient(180deg, var(--gold-hi), var(--gold)); color: var(--on-gold); padding: 15px 28px; justify-self: start;
+}
+.submit:hover { filter: brightness(1.08); }
+.fine { font-size: .88rem; color: var(--muted); }
+.err { color: var(--err); font-size: .9rem; min-height: 1.2em; }
+.result { display: grid; gap: 12px; border: 1px dashed var(--gold); padding: 16px; background: var(--field); }
+.result pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; font-size: .95rem; }
+.copy { font: inherit; font-weight: 700; justify-self: start; background: var(--wine); color: var(--gold-hi); border: 1px solid var(--gold); border-radius: 2px; padding: 10px 20px; cursor: pointer; }
+
+.mail, .mail-text { color: var(--gold-hi); font-weight: 500; overflow-wrap: anywhere; user-select: all; }
+.mail { text-decoration-color: var(--gold-lo); text-underline-offset: 3px; }
+
+footer { text-align: center; padding-block: 8px 48px; font-size: .74rem; letter-spacing: .24em; text-transform: uppercase; color: var(--gold-lo); }
+</style>
+
+<div class="hero-wrap">
+  <header class="hero">
+    <div class="frame">
+      <div class="big18" aria-hidden="true">18</div>
+      <div class="hero-inner">
+        <p class="eyebrow">You're invited to celebrate</p>
+        <h1><small>Yona's</small>18th Birthday</h1>
+        <hr class="rule">
+        <p class="sub">An Overnight Pool Party</p>
+        <p class="tag">A night of sunshine, swimming, laughter, and memories under the stars.</p>
+        <a class="cta" href="#invitation">Open Invitation <span aria-hidden="true">↓</span></a>
+      </div>
+    </div>
+  </header>
+</div>
+
+<main>
+  <section id="invitation">
+    <p class="eyebrow">Make a splash with me</p>
+    <h2>Let's Celebrate!</h2>
+    <p class="lead">Celebrate with me as I welcome my 18th year! Join me for an unforgettable overnight pool party filled with good vibes, fun, and great company. Bring your swimsuit and get ready to make a splash!</p>
+    <ul class="facts">
+      <li>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M8 3v4M16 3v4M3 10h18"/></svg></div>
+        <div><b>Date</b><span>November 7–8, 2026</span></div>
+      </li>
+      <li>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <div><b>Time</b><span>7:00 PM to 5:00 PM (overnight)</span></div>
+      </li>
+      <li>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+        <div><b>Venue</b><span>Balai Rajah</span></div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="eyebrow">Please take note</p>
+    <h2>Party Reminders</h2>
+    <div class="reminders">
+      <article class="reminder">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12M12 8c-2-4-6-3-5 0M12 8c2-4 6-3 5 0"/></svg></div>
+        <div><h3>GIFTS</h3><p>I don't have a specific wishlist. My only personal wish is to have a fixie bike that I can use to get to school without paying for transportation. However, any kind of gift is more than enough and will be greatly appreciated. There will be no traditional 18 Blue Bills ceremony. Cash gifts are also welcome, but no amount is required or expected. Please give only what you're comfortable with. Your presence is already a gift!</p></div>
+      </article>
+      <article class="reminder">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 5a3.5 3.5 0 0 1 0 6.5M18 14.5c2 .7 3.5 2.6 3.5 5.5"/></svg></div>
+        <div><h3>GUEST LIMIT</h3><p>The party has a maximum capacity of 25 guests. Any additional guest or plus-one beyond the limit will be charged an extra fee of <strong>₱500 per person</strong>.</p></div>
+      </article>
+      <article class="reminder">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5z"/></svg></div>
+        <div><h3>OVERNIGHT STAY</h3><p>If you plan to stay overnight, please inform <strong>Yona Yadao</strong> in advance so proper arrangements can be made.</p></div>
+      </article>
+      <article class="reminder">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12M6 21h12M7 3c0 5 5 6 5 9s-5 4-5 9M17 3c0 5-5 6-5 9s5 4 5 9"/></svg></div>
+        <div><h3>OVERNIGHT RSVP DEADLINE</h3><p>Please confirm your overnight stay on or before <strong>November 6, 5:00 PM</strong>. Late confirmations may not be accommodated due to limited space.</p></div>
+      </article>
+      <article class="reminder">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/></svg></div>
+        <div><h3>ATTENDANCE CONFIRMATION</h3><p>Kindly confirm your attendance and specify whether you will be joining the overnight swimming party.</p></div>
+      </article>
+      <article class="reminder">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 16V11l2-5h10l2 5v5M3 16h18v3H3zM7.5 13h.01M16.5 13h.01"/></svg></div>
+        <div><h3>PARKING</h3><p>Please be advised that parking space is limited. If you plan to drive to the venue, kindly email me as soon as possible so I can make the necessary parking arrangements. Email: <a class="mail" href="mailto:yadao.yhona@gmail.com">yadao.yhona@gmail.com</a></p></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="rsvp">
+    <p class="eyebrow">Save your spot</p>
+    <h2>Kindly RSVP</h2>
+    <p class="lead">Please fill out the form below to let me know if you'll be celebrating with me and whether you'll be staying overnight.</p>
+    <form id="rsvp-form" novalidate>
+      <div>
+        <label class="l" for="name">Your full name</label>
+        <input type="text" id="name" name="name" autocomplete="name" placeholder="e.g. Maria Santos">
+      </div>
+      <fieldset>
+        <legend>Will you be attending?</legend>
+        <div class="choices">
+          <label><input type="radio" name="attend" value="Yes, I'll be there!"><span>Yes, I'll be there!</span></label>
+          <label><input type="radio" name="attend" value="Sorry, can't make it"><span>Sorry, can't make it</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Will you be staying overnight?</legend>
+        <div class="choices">
+          <label><input type="radio" name="overnight" value="Yes"><span>Yes</span></label>
+          <label><input type="radio" name="overnight" value="No"><span>No</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Bringing a plus-one?</legend>
+        <div class="choices">
+          <label><input type="radio" name="plusone" value="No, just me" checked><span>Just me</span></label>
+          <label><input type="radio" name="plusone" value="Yes, +1"><span>+1 Plus One</span></label>
+        </div>
+      </fieldset>
+      <div>
+        <label class="l" for="notes">Message or special notes (optional)</label>
+        <textarea id="notes" name="notes"></textarea>
+      </div>
+      <p class="err" id="err" role="alert"></p>
+      <button class="submit" type="submit">Send My RSVP ✉</button>
+      <div class="result" id="result" hidden>
+        <p><strong>Your RSVP is ready.</strong> Copy it and email it to <a class="mail" href="mailto:yadao.yhona@gmail.com?subject=RSVP%20for%20Yona%27s%2018th%20Birthday">yadao.yhona@gmail.com</a> before the RSVP deadline.</p>
+        <pre id="msg"></pre>
+        <button class="copy" type="button" id="copy">Copy RSVP</button>
+        <p class="fine" id="copied" aria-live="polite"></p>
+      </div>
+      <p class="fine">When you submit, your RSVP details will be written out for you to copy and email to <span class="mail-text">yadao.yhona@gmail.com</span>. Please send it before the RSVP deadline.</p>
+    </form>
+  </section>
+</main>
+
+<footer>With love &amp; sunshine · Yona's 18th Birthday</footer>
+
+<script>
+(function () {
+  var form = document.getElementById('rsvp-form');
+  var err = document.getElementById('err');
+  var result = document.getElementById('result');
+  var msg = document.getElementById('msg');
+  var copied = document.getElementById('copied');
+
+  function val(n) { var c = form.querySelector('input[name="' + n + '"]:checked'); return c ? c.value : ''; }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('name').value.trim();
+    var attend = val('attend'), overnight = val('overnight');
+    var plus = val('plusone') || 'No, just me';
+    var notes = document.getElementById('notes').value.trim();
+    if (!name) { err.textContent = 'Please enter your full name.'; document.getElementById('name').focus(); return; }
+    if (!attend) { err.textContent = 'Please tell me whether you will be attending.'; return; }
+    if (!overnight) { err.textContent = 'Please choose whether you will stay overnight.'; return; }
+    err.textContent = '';
+    msg.textContent = [
+      "RSVP for Yona's 18th Birthday – Overnight Pool Party",
+      '',
+      'Name: ' + name,
+      'Attending: ' + attend,
+      'Staying overnight: ' + overnight,
+      'Plus-one: ' + plus,
+      'Notes: ' + (notes || 'None')
+    ].join('\n');
+    copied.textContent = '';
+    result.hidden = false;
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  document.getElementById('copy').addEventListener('click', function () {
+    var text = msg.textContent;
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(msg);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      copied.textContent = 'Text selected. Press copy on your device.';
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { copied.textContent = 'Copied.'; }, fallback);
+    } else { fallback(); }
+  });
+})();
+</script>
